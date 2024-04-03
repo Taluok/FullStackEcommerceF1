@@ -1,6 +1,6 @@
 # Ecommerce Full Stack
 
-Este es un proyecto de Ecommerce Full Stack que consta de un frontend desarrollado en React.js y un backend desarrollado en Node.js con Express y MongoDB. El proyecto permite a los usuarios navegar por diferentes productos, agregar productos al carrito de compras y realizar compras mediante un proceso de pago simulado.
+Este es un proyecto de Ecommerce Full Stack (Realizado solo a modo de practica y aprendizaje) que consta de un frontend desarrollado en React.js y un backend desarrollado en Node.js con Express y MongoDB. El proyecto permite a los usuarios navegar por diferentes productos, agregar productos al carrito de compras y realizar compras mediante un proceso de pago simulado.
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:4001) to view it in your browser.
