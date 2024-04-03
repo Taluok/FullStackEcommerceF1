@@ -13,31 +13,18 @@ app.use(express.json());
 app.use(cors());
 
 // Conexión a la base de datos MongoDB
-mongoose.connect("mongodb+srv://tanialuduenaok:1234567890@cluster0.s1ide49.mongodb.net/finalBackend", { 
+mongoose.connect("mongodb+srv://tanialuduenaok:1234567890@cluster0.s1ide49.mongodb.net/finalBackend", {
     useNewUrlParser: true,
     useUnifiedTopology: true
 })
-.then(() => console.log("MongoDB connected"))
-.catch(err => console.log(err));
+    .then(() => console.log("MongoDB connected"))
+    .catch(err => console.log(err));
 
 // Ruta principal
 app.get("/", (req, res) => {
     res.send("Express App is Running");
 });
 
-// Ruta para obtener las nuevas colecciones
-app.get('/newcollections', async (req, res) => {
-    try {
-        // Aquí obtienes los datos de las nuevas colecciones desde la base de datos
-        const newCollectionsData = await NewCollection.find({});
-        
-        // Una vez que tengas los datos, envíalos como respuesta
-        res.json(newCollectionsData);
-    } catch (error) {
-        console.error('Error fetching new collections:', error);
-        res.status(500).json({ error: 'Error fetching new collections' });
-    }
-});
 
 // Engine de almacenamiento de imágenes
 const storage = multer.diskStorage({
@@ -198,9 +185,22 @@ const sendEmail = async (email) => {
         subject: 'Eliminación de cuenta por inactividad',
         text: 'Tu cuenta ha sido eliminada debido a la inactividad.'
     };
-    
+
     await transporter.sendMail(mailOptions);
 };
+
+// Ruta para obtener todos los posts
+app.get('/api/posts', async (req, res) => {
+    try {
+        const posts = await Post.find({});
+        console.log("Posts fetched");
+        res.send(posts);
+    } catch (error) {
+        console.error("Error fetching posts:", error.message);
+        res.status(500).json({ success: false, error: error.message });
+    }
+});
+
 
 // Puerto de escucha
 const port = process.env.PORT || 4001;
