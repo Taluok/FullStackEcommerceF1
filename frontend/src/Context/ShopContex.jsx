@@ -46,17 +46,17 @@ const ShopContextProvider = (props) => {
                 setError(error.message);
             }
         };
-
+    
         fetchProducts();
     }, []);
-
+    
     const addToCart = (itemId) => {
         setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] + 1 }));
         if (localStorage.getItem('auth-token')) {
             fetch('http://localhost:4001/addtocart', {
                 method: 'POST',
                 headers: {
-                    'Accept': 'application/json',
+                    'Accept': 'application/form-data',
                     'auth-token': localStorage.getItem('auth-token'),
                     'Content-Type': 'application/json',
                 },
@@ -98,11 +98,13 @@ const ShopContextProvider = (props) => {
 
     const getTotalCartAmount = () => {
         let totalAmount = 0;
-        for (const item in cartItems) {
-            if (cartItems[item] > 0) {
-                const itemInfo = allProducts.find((product) => product.id === Number(item));
-                if (itemInfo) {
-                    totalAmount += itemInfo.new_price * cartItems[item];
+        if (allProducts && allProducts.length > 0) {
+            for (const item in cartItems) {
+                if (cartItems[item] > 0) {
+                    const itemInfo = allProducts.find((product) => product.id === Number(item));
+                    if (itemInfo) {
+                        totalAmount += itemInfo.new_price * cartItems[item];
+                    }
                 }
             }
         }

@@ -3,7 +3,6 @@ import './NewColections.css';
 import Item from '../Item/Item';
 
 const NewCollections = () => {
-
     const [newCollections, setNewCollections] = useState([]);
 
     useEffect(() => {
@@ -14,8 +13,13 @@ const NewCollections = () => {
                 }
                 return response.json();
             })
-            .then((data) => setNewCollections(data))
-            .catch((error) => console.error('Error fetching new collections:', error));
+            .then((data) => {
+                console.log('Data fetched:', data);
+                setNewCollections(data);
+            })
+            .catch((error) => {
+                console.error('Error fetching new collections:', error);
+            });
     }, []);
 
     return (
@@ -32,4 +36,5 @@ const NewCollections = () => {
 }
 
 export default NewCollections;
+
 

@@ -13,9 +13,12 @@ app.use(express.json());
 app.use(cors());
 
 // Conexión a la base de datos MongoDB
-mongoose.connect("mongodb+srv://tanialuduenaok:1234567890@cluster0.s1ide49.mongodb.net/finalBackend", { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(() => console.log("MongoDB connected"))
-    .catch(err => console.log(err));
+mongoose.connect("mongodb+srv://tanialuduenaok:1234567890@cluster0.s1ide49.mongodb.net/finalBackend", { 
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+})
+.then(() => console.log("MongoDB connected"))
+.catch(err => console.log(err));
 
 // Ruta principal
 app.get("/", (req, res) => {
@@ -181,7 +184,7 @@ const sendEmail = async (email) => {
         subject: 'Eliminación de cuenta por inactividad',
         text: 'Tu cuenta ha sido eliminada debido a la inactividad.'
     };
-
+    
     await transporter.sendMail(mailOptions);
 };
 

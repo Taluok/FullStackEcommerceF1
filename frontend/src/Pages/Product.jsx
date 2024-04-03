@@ -7,11 +7,12 @@ import ProductDisplay from '../Components/ProductDisplay/ProductDisplay';
 import DescriptionBox from '../Components/DescriptionBox/DescriptionBox';
 
 const Products = () => {
-    const { all_product } = useContext(ShopContext);
+    const { allProducts } = useContext(ShopContext);
     const { productId } = useParams();
-    // Verificar si productId es válido y si existe el producto en all_product
-    const product = all_product.find((e) => e.id === Number(productId));
-    // Asegurarse de que product tenga un valor antes de renderizar ProductDisplay
+    
+    const product = allProducts && allProducts.length > 0 ? allProducts.find((e) => e.id === Number(productId)) : null;
+
+
     return (
         <div>
             {product && (
@@ -26,3 +27,5 @@ const Products = () => {
 };
 
 export default Products;
+
+
