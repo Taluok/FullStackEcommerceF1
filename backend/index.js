@@ -25,6 +25,20 @@ app.get("/", (req, res) => {
     res.send("Express App is Running");
 });
 
+// Ruta para obtener las nuevas colecciones
+app.get('/newcollections', async (req, res) => {
+    try {
+        // Aquí obtienes los datos de las nuevas colecciones desde la base de datos
+        const newCollectionsData = await NewCollection.find({});
+        
+        // Una vez que tengas los datos, envíalos como respuesta
+        res.json(newCollectionsData);
+    } catch (error) {
+        console.error('Error fetching new collections:', error);
+        res.status(500).json({ error: 'Error fetching new collections' });
+    }
+});
+
 // Engine de almacenamiento de imágenes
 const storage = multer.diskStorage({
     destination: './upload/images',
